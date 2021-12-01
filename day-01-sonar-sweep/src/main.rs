@@ -22,17 +22,16 @@ fn read_input(filename: &str) -> Vec<u32> {
 }
 
 fn part1(numbers: &Vec<u32>) -> u32 {
-    let mut previous: u32 = numbers[0];
-    let mut num_increases = 0;
-
-    for &n in numbers {
-        if n > previous {
-            num_increases += 1;
-        }
-        previous = n;
-    }
-
-    num_increases
+    (0..numbers.len() - 1)
+        .map(|pair_start| {
+            let pair: Vec<&u32> = numbers.iter().skip(pair_start).take(2).collect();
+            if pair[0] < pair[1] {
+                1
+            } else {
+                0
+            }
+        })
+        .sum()
 }
 
 fn part2(numbers: &Vec<u32>) -> u32 {
