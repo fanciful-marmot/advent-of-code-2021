@@ -9,6 +9,7 @@ fn main() {
     let numbers = read_input(filename);
 
     println!("part 1: {}", part1(&numbers));
+    println!("part 2: {}", part2(&numbers));
 }
 
 fn read_input(filename: &str) -> Vec<u32> {
@@ -32,4 +33,14 @@ fn part1(numbers: &Vec<u32>) -> u32 {
     }
 
     num_increases
+}
+
+fn part2(numbers: &Vec<u32>) -> u32 {
+    // Calculate the window sums
+    let window_sums = (0..numbers.len() - 2)
+        .map(|window_start| numbers.iter().skip(window_start).take(3).sum())
+        .collect();
+
+    // Just run it through part 1
+    part1(&window_sums)
 }
