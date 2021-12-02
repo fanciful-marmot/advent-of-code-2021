@@ -12,7 +12,6 @@ const fileContents = fs.readFileSync(inputFileName, {encoding: 'utf8'})
 // part 1: 1990000
 // part 2: 1975421260
 
-// Depths is array of numbers
 const movements = parseFile(fileContents.trim().split('\n'))
 console.log(`part 1: ${part1(movements)}`)
 console.log(`part 2: ${part2(movements)}`)
