@@ -24,11 +24,12 @@ fn read_input(filename: &str) -> Vec<Vec2> {
         .lines()
         .map(|l| {
             let parts: Vec<&str> = l.split(' ').collect();
+            let magnitude = parts[1].parse::<i32>().unwrap();
 
             match parts[0] {
-                "forward" => Vec2 { x: parts[1].parse::<i32>().unwrap(), y: 0},
-                "up" => Vec2 { x: 0, y: -parts[1].parse::<i32>().unwrap()},
-                "down" => Vec2 { x: 0, y: parts[1].parse::<i32>().unwrap()},
+                "forward" => Vec2 { x: magnitude, y: 0},
+                "up" => Vec2 { x: 0, y: -magnitude},
+                "down" => Vec2 { x: 0, y: magnitude},
                 _ => panic!("Unknown instruction \"{}\"", parts[0])
             }
         })
@@ -36,14 +37,20 @@ fn read_input(filename: &str) -> Vec<Vec2> {
 }
 
 fn part1(movements: &Vec<Vec2>) -> i32 {
-    let position = movements.iter().fold((0, 0), |acc, vec| (acc.0 + vec.x, acc.1 + vec.y));
+    let position = movements.iter().fold((0, 0), |acc, vec| (
+        acc.0 + vec.x, // x
+        acc.1 + vec.y, // y
+    ));
 
     position.0 * position.1
 }
 
 fn part2(movements: &Vec<Vec2>) -> i32 {
-    // (x, y, aim)
-    let position = movements.iter().fold((0, 0, 0), |acc, vec| (acc.0 + vec.x, acc.1 + vec.x * acc.2, acc.2 + vec.y));
+    let position = movements.iter().fold((0, 0, 0), |acc, vec| (
+        acc.0 + vec.x, // x
+        acc.1 + vec.x * acc.2, // y
+        acc.2 + vec.y, // aim
+    ));
 
     position.0 * position.1
 }
