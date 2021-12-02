@@ -14,7 +14,7 @@ fn main() {
     let movements = read_input(filename);
 
     println!("part 1: {}", part1(&movements));
-    // println!("part 2: {}", part2(&numbers));
+    println!("part 2: {}", part2(&movements));
 }
 
 fn read_input(filename: &str) -> Vec<Vec2> {
@@ -41,5 +41,9 @@ fn part1(movements: &Vec<Vec2>) -> i32 {
     position.0 * position.1
 }
 
-// fn part2(numbers: &Vec<u32>) -> u32 {
-// }
+fn part2(movements: &Vec<Vec2>) -> i32 {
+    // (x, y, aim)
+    let position = movements.iter().fold((0, 0, 0), |acc, vec| (acc.0 + vec.x, acc.1 + vec.x * acc.2, acc.2 + vec.y));
+
+    position.0 * position.1
+}
