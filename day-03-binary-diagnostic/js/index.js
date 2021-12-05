@@ -59,7 +59,7 @@ function splitFilterAtBit(lines, i) {
   return { zero, one }
 }
 
-function part2(movements) {
+function part2(lines) {
   const numDigits = lines[0].length
 
   // Determine majority
