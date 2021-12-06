@@ -51,6 +51,14 @@ function markBoard(board, number) {
   })
 }
 
+function resetBoard(board) {
+  board.forEach(line => {
+    line.forEach(cell => {
+      cell.marked = false
+    })
+  })
+}
+
 function hasWon(board) {
   const numRows = board.length
   const numColumns = board[0].length
@@ -109,5 +117,27 @@ function part1(bingo) {
 }
 
 function part2() {
+  let { numberCalls, boards } = bingo
 
+  // Resets the boards from part 1. Could just keep playing, but this works too
+  boards.forEach(resetBoard)
+
+  let i = 0
+  while (boards.length > 1 || !hasWon(boards[0])) {
+    const n = numberCalls[i]
+
+    // Mark all boards
+    boards.forEach(board => {
+      markBoard(board, n)
+    })
+
+    // Filter out winning boards if there's more than 1
+    if (boards.length > 1) {
+      boards = boards.filter(board => !hasWon(board))
+    }
+
+    i++
+  }
+
+  return encodeAnswer(boards[0], numberCalls[i - 1])
 }
