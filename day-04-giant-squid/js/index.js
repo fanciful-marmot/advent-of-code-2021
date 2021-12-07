@@ -116,7 +116,7 @@ function part1(bingo) {
   return encodeAnswer(winningBoard, numberCalls[i - 1])
 }
 
-function part2() {
+function part2(bingo) {
   let { numberCalls, boards } = bingo
 
   // Resets the boards from part 1. Could just keep playing, but this works too
